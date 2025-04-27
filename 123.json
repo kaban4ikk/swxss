@@ -2,19 +2,89 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Example API",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "description": "API for testing purposes"
   },
-  "paths": {},
-  "components": {},
-  "url": "https://xss.smarpo.com/test.yaml",
-  "urls": [
+  "servers": [
     {
-      "url": "https://xss.smarpo.com/test.yaml",
-      "name": "Foo"
-    },
-    {
-      "url": "https://xss.smarpo.com/test2.yaml",
-      "name": "Foo2"
+      "url": "https://api.example.com/v1",
+      "description": "Production server"
     }
-  ]
+  ],
+  "paths": {
+    "/test": {
+      "get": {
+        "summary": "Get test data",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestData"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/urls": {
+      "get": {
+        "summary": "Get all URLs",
+        "responses": {
+          "200": {
+            "description": "List of URLs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UrlItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TestData": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "example": "https://xss.smarpo.com/test.yaml"
+          }
+        }
+      },
+      "UrlItem": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "x-custom-data": {
+    "url": "https://xss.smarpo.com/test.yaml",
+    "urls": [
+      {
+        "url": "https://xss.smarpo.com/test.yaml",
+        "name": "Foo"
+      },
+      {
+        "url": "https://xss.smarpo.com/test2.yaml",
+        "name": "Foo2"
+      }
+    ]
+  }
 }
